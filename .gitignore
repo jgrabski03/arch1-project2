@@ -1,0 +1,6 @@
+*.o
+*.elf
+*~
+libmsp430.dylib
+demos/h/
+demos/lib/
