@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include "switches.h"
 #include "buzzer.h"
+#include "stateMachines.h"
 
 static char switch_update_interrupt_sense()
 {
@@ -23,11 +24,11 @@ void switch_interrupt_handler()
 {
   char p2val = switch_update_interrupt_sense();
 
-  if      (!(p2val & SW1)) buzzer_set_period(4000);   
-  else if (!(p2val & SW2)) buzzer_set_period(2000);   
-  else if (!(p2val & SW3)) buzzer_set_period(1000);   
-  else if (!(p2val & SW4)) buzzer_set_period(500);    
-  else                     buzzer_set_period(0);      
+  /* buttons read 0 when pressed */
+  if      (!(p2val & SW1)) transition(0);
+  else if (!(p2val & SW2)) transition(1);
+  else if (!(p2val & SW3)) transition(2);
+  else if (!(p2val & SW4)) transition(3);
 }
 
 

@@ -6,10 +6,11 @@
 
 int main(void)
 {
-  configureClocks();		
+  configureClocks();
   led_init();
   buzzer_init();
   switch_init();
+  enableWDTInterrupts();	/* 250 ticks/sec drive the state machine */
 
-  or_sr(0x18);			
+  or_sr(0x18);			/* CPU off, interrupts on */
 }
